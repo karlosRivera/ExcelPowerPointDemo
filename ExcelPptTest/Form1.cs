@@ -20,7 +20,7 @@ namespace ExcelPptTest
             InitializeComponent();
         }
 
-        List<Tuple<string, string>> ConvertToStringArray(System.Array values)
+        List<Tuple<string, string>> GetData(System.Array values)
         {
 
             // create a new string array
@@ -131,14 +131,23 @@ namespace ExcelPptTest
                 //var writeRange = targetSheet.Range["A1:B15"];
                 destRange = targetSheet.get_Range("A1:B15");
 
-                System.Array myvalues = (System.Array)destRange.Cells.Value;
-                List<Tuple<string, string>> cellData = ConvertToStringArray(myvalues);
+                pptSlide.Shapes[1].TextFrame.TextRange.Text = "Spain Data 01/01/2017 to 20/01/2017";
+                pptSlide.Shapes[1].TextFrame.TextRange.Font.Name = "Verdana";
+                pptSlide.Shapes[1].TextFrame.TextRange.Font.Size = 10;
 
-                int iRows = cellData.Count;
+                System.Array myvalues = (System.Array)destRange.Cells.Value;
+                List<Tuple<string, string>> cellData = GetData(myvalues);
+
+                int iRows = cellData.Count+1;
                 int iColumns = 2;
-                int row = 1;
+                int row = 2;
 
                 oShape = pptSlide.Shapes.AddTable(iRows, iColumns, 500, 110, 160, 120);
+                oShape.Table.Cell(1, 1).Merge(oShape.Table.Cell(1, 2));
+
+                oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Text = "Spain Data 01/01/2017 to 20/01/2017";
+                oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Font.Name = "Verdana";
+                oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Font.Size = 8;
 
                 foreach (Tuple<string, string> item in cellData)
                 {
@@ -148,13 +157,21 @@ namespace ExcelPptTest
                     oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Text = strdate;
                     oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Font.Name = "Verdana";
                     oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Font.Size = 8;
-                    oShape.Table.Cell(row, 1).Shape.Fill.BackColor.RGB = System.Drawing.Color.FromArgb(255, 0, 0).ToArgb(); 
-                    oShape.Table.Cell(row, 1).Shape.Fill.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;
+
 
                     oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Text = (strValue.StartsWith("0") ?  "0%" : (strValue + "0%"));
                     oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Name = "Verdana";
                     oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Size = 8;
 
+                    //if (row == 1)
+                    //{
+                    //    oShape.Table.Cell(row, 1).Shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(208, 208, 208).ToArgb();
+                    //    oShape.Table.Cell(row, 1).Shape.Fill.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;
+
+                    //    oShape.Table.Cell(row, 2).Shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(208, 208, 208).ToArgb();
+                    //    oShape.Table.Cell(row, 2).Shape.Fill.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;
+
+                    //}
 
                     row++;
                 }
