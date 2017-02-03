@@ -7,15 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using xlNS = Microsoft.Office.Interop.Excel;
 using pptNS = Microsoft.Office.Interop.PowerPoint;
 
 namespace ExcelPptTest
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
         }
@@ -37,7 +36,7 @@ namespace ExcelPptTest
 
             var data = new List<Tuple<string, string>>();
             string strDate = "", strValue = "";
-            decimal decval=0;
+            decimal decval = 0;
 
             for (int i = 2; i <= 15; i++)
             {
@@ -72,7 +71,7 @@ namespace ExcelPptTest
             return data;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form2_Load(object sender, EventArgs e)
         {
             pptNS.ApplicationClass powerpointApplication = null;
             pptNS.Presentation pptPresentation = null;
@@ -80,6 +79,8 @@ namespace ExcelPptTest
             pptNS.ShapeRange shapeRange = null;
             pptNS.Shape oTxtShape = null;
             pptNS.Shape oShape = null;
+            pptNS.Shape oChartShape = null;
+
 
             xlNS.ApplicationClass excelApplication = null;
             xlNS.Workbook excelWorkBook = null;
@@ -126,11 +127,13 @@ namespace ExcelPptTest
 
                 // Add a blank slide to the presentation.
                 pptSlide = pptPresentation.Slides.Add(1, pptNS.PpSlideLayout.ppLayoutBlank);
-                    
+
 
                 // capture range
                 //var writeRange = targetSheet.Range["A1:B15"];
                 destRange = targetSheet.get_Range("A1:B15");
+
+                // adding header text for slides
                 oTxtShape = pptSlide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, Left: 30, Top: 30, Width: 340, Height: 340);
                 oTxtShape.TextFrame.TextRange.Text = "This is my demo text";
                 oTxtShape.TextEffect.FontName = "Arial";
@@ -140,7 +143,7 @@ namespace ExcelPptTest
                 System.Array myvalues = (System.Array)destRange.Cells.Value;
                 List<Tuple<string, string>> cellData = GetData(myvalues);
 
-                int iRows = cellData.Count+1;
+                int iRows = cellData.Count + 1;
                 int iColumns = 2;
                 int row = 2;
 
@@ -161,7 +164,7 @@ namespace ExcelPptTest
                     oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Font.Size = 8;
 
 
-                    oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Text = (strValue.StartsWith("0") ?  "0%" : (strValue + "0%"));
+                    oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Text = (strValue.StartsWith("0") ? "0%" : (strValue + "0%"));
                     oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Name = "Verdana";
                     oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Size = 8;
 
@@ -179,7 +182,10 @@ namespace ExcelPptTest
                 }
 
                 oShape.Top = 100;
-                oShape.Left =30;
+                oShape.Left = 30;
+
+               oChartShape= pptSlide.Shapes.AddChart(Microsoft.Office.Core.XlChartType.xlLine, 20F, 30F, 400F, 300F);
+               
 
                 //copy range
                 //destRange.Copy();
@@ -258,378 +264,5 @@ namespace ExcelPptTest
 
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Date", typeof(DateTime));
-            dt.Columns.Add("Data", typeof(Int32));
-
-            DataRow dr = dt.NewRow();
-            dr[0] = DateTime.Parse("01-03-2017");
-            dr[1] = 20;
-            dt.Rows.Add(dr);
-
-            dr = dt.NewRow();
-            dr[0] = DateTime.Parse("01-04-2017");
-            dr[1] = 0;
-            dt.Rows.Add(dr);
-
-            dr = dt.NewRow();
-            dr[0] = DateTime.Parse("01-05-2017");
-            dr[1] = 0;
-            dt.Rows.Add(dr);
-
-            dr = dt.NewRow();
-            dr[0] = DateTime.Parse("01-09-2017");
-            dr[1] = 10;
-            dt.Rows.Add(dr);
-
-            DateTimeOffset localTime = DateTimeOffset.UtcNow;
-            var offsetVal = localTime.Offset;
-
-        }
-
-        //        private void button1_Click(object sender, EventArgs e)
-        //        {
-        //            pptNS.Presentation _pPres = null;
-        //            pptNS.ApplicationClass _pApp = null;
-        //            int noofSalespersons = 0 ;
-
-        //            _pApp = new pptNS.ApplicationClass();
-
-        ////Graph.Chart objChart;
-
-        //int noofSlides;
-
-        //noofSalespersons =12;
-
-        //string sTemplateFile = Server.MapPath("Resource\\Template.ppt");
-
-        //_pPres = _pApp.Presentations.Open(sTemplateFile, MsoTriState.msoTrue, MsoTriState.msoTrue, MsoTriState.msoFalse);
-
-        //noofSlides = (noofSalespersons / 10) + 1;
-
-        //if (noofSalespersons%10>0)
-
-        //{
-
-        //noofSlides += 1;
-
-        //}
-
-        //int slideIndex=1;
-
-        //while (_pPres.Slides.Count!=noofSlides)
-
-        //{
-
-        //_pPres.Slides.InsertFromFile("D:\\Template.ppt", slideIndex, 1, 1);
-
-        //slideIndex += 1;
-
-        //}
-
-
-        //Chart chart;
-
-        //Graph.DataSheet dataSheet;
-
-        //for (int i = 1; i <= slideIndex; i++)
-
-        //{
-
-        //pptNS.Slide slide = _pPres.Slides._Index(i) as Slide;
-
-        //if (i==1)
-
-        //{
-
-        //pptNS.Shape shape = slide.Shapes[1];
-
-
-        //chart = shape.OLEFormat.Object as Graph.Chart;
-
-        //dataSheet = chart.Application.DataSheet;
-
-        //dataSheet.Cells[2, 2] = "50";
-
-        //dataSheet.Cells[2, 3] = "40";
-
-        //dataSheet.Cells[2, 4] = "50";
-
-        //dataSheet.Cells[2, 5] = "50";
-
-        //dataSheet.Cells[3, 2] = "60";
-
-        //dataSheet.Cells[3, 3] = "70";
-
-        //dataSheet.Cells[3, 4] = "80";
-
-        //dataSheet.Cells[3, 5] = "60";
-
-        ////dataSheet.Cells[3, 6] = "0";
-
-        //dataSheet.Cells[4, 2] = "50";
-
-        //dataSheet.Cells[4, 3] = "40";
-
-        //dataSheet.Cells[4, 4] = "50";
-
-        //dataSheet.Cells[4, 5] = "50";
-
-        ////dataSheet.Cells[4, 6] = "0";
-
-        //chart.Application.Update();
-
-        //dataSheet = null;
-
-        //chart = null;
-
-        //}
-
-        //ArrayList listShapeName = new ArrayList();
-
-        //ArrayList listAutoShapes = new ArrayList();
-
-        //ArrayList listTextBox = new ArrayList();
-
-        //ArrayList listPlaceHolder = new ArrayList();
-
-        //int reminingShapes;
-
-        //reminingShapes = noofSalespersons % 10;
-
-        //if (i>=2)
-
-        //{
-
-        //if ((i == slideIndex) && (reminingShapes>0))
-
-        //{
-
-        //int remingCount = 0;
-
-        //for (int k = 1; k <= slide.Shapes.Count; k++)
-
-        //{
-
-        //pptNS.Shape shape = slide.Shapes[k];
-
-        ////string shapeName = shape.Name;
-
-        ////listShapeName.Add(shapeName);
-
-        //if (shape.Type == MsoShapeType.msoEmbeddedOLEObject)
-
-        //{
-
-        //remingCount += 1;
-
-        //if (remingCount>reminingShapes)
-
-        //{
-
-        ////slide.Shapes[k].Delete();
-
-        //listShapeName.Add(k);
-
-        //}
-
-        //}
-
-        //}
-
-        //for (int m = listShapeName.Count - 1; m >= 0; m--)
-
-        //{
-
-        //slide.Shapes[listShapeName[m]].Delete();
-
-        //}
-
-        //listShapeName.Clear();
-
-        //for (int k = 1; k <= slide.Shapes.Count; k++)
-
-        //{
-
-        //pptNS.Shape shape = slide.Shapes[k];
-
-
-        //if (reminingShapes < 6)
-
-        //{
-
-        //if (shape.Type == MsoShapeType.msoTextBox)
-
-        //{
-
-        //listTextBox.Add(k);
-
-        //}
-
-        //}
-
-        //}
-
-        //if (listTextBox.Count>0)
-
-        //{
-
-        //for (int m = listTextBox.Count - 1; m >= listTextBox.Count - 4; m--)
-
-        //{
-
-        //slide.Shapes[listTextBox[m]].Delete();
-
-        //}
-
-        //listTextBox.Clear();
-
-        //}
-
-
-        //for (int k = 1; k <= slide.Shapes.Count; k++)
-
-        //{
-
-        //pptNS.Shape shape = slide.Shapes[k];
-
-        //if (reminingShapes < 6)
-
-        //{
-
-        //if (shape.Type == MsoShapeType.msoAutoShape)
-
-        //{
-
-        //listAutoShapes.Add(k);
-
-        //}
-
-        //}
-
-        //}
-
-        //if (listAutoShapes.Count>0)
-
-        //{
-
-        //for (int m = listAutoShapes.Count - 1; m >= listAutoShapes.Count - 4; m--)
-
-        //{
-
-        //slide.Shapes[listAutoShapes[m]].Delete();
-
-        //}
-
-        //listAutoShapes.Clear();
-
-        //}
-
-        //}
-
-        //int z = 0;
-
-        //int bottom = 0;
-
-        //for (int k = 1; k <= slide.Shapes.Count; k++)
-
-        //{
-
-        //pptNS.Shape shape = slide.Shapes[k];
-
-        //string shapeName= shape.Name;
-
-        //if (shape.Type==MsoShapeType.msoEmbeddedOLEObject)
-
-        //{
-
-        //listShapeName.Add(shapeName);
-
-
-        //chart =shape.OLEFormat.Object as Graph.Chart;
-
-        //dataSheet = chart.Application.DataSheet;
-
-        ////if (k % 2 == 0)
-
-        ////{
-
-        //z = z + 1;
-
-
-        ////shape.Top = newHeight;
-
-        ////shape.IncrementTop(200);//(200-shape.Height) + shape.Top);
-
-        //shape.Height = ((42 - (2 * z)) * 200) / (40);
-
-        ////shape.Width = 90;
-
-        //dataSheet.Cells[2, 2] = (((11-z) * 100) / 100).ToString();
-
-        //dataSheet.Cells[3, 2] = (((11-z) * 100) / 100).ToString();
-
-        //dataSheet.Cells[4, 2] = (((11-z) * 100) / 100).ToString();
-
-        //dataSheet.Cells[5, 2] = (((11-z) * 100) / 100).ToString();
-
-        ////shape.Width = 90;
-
-
-        ////}
-
-        ////else
-
-        ////{
-
-
-        //// //shape.Width = 86;
-
-        //// shape.Height = 200;
-
-        //// //newHeight = shape.Top;
-
-        //// dataSheet.Cells[2, 2] = ((80 * 100) / 260).ToString();
-
-        //// dataSheet.Cells[3, 2] = ((70 * 100) / 260).ToString();
-
-        //// dataSheet.Cells[4, 2] = ((60 * 100) / 260).ToString();
-
-        //// dataSheet.Cells[5, 2] = ((50 * 100) / 260).ToString();
-
-        ////}
-
-        //chart.Application.Update();
-
-        //dataSheet = null;
-
-        //chart = null;
-
-        //}
-
-        //}
-
-
-
-
-        //}
-
-        //_pPres.SaveAs("d:\\Vijay\\pptNS\\Sample2.ppt", PpSaveAsFileType.ppSaveAsPresentation, Microsoft.Office.Core.MsoTriState.msoFalse);
-
-        //_pPres.Close();
-
-        //_pApp.Quit();
-
-        //GC.Collect();
-
-        //        }
-        //    }
-        //}
-
     }
-
 }
