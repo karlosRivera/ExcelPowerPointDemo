@@ -80,6 +80,7 @@ namespace ExcelPptTest
             pptNS.ShapeRange shapeRange = null;
             pptNS.Shape oTxtShape = null;
             pptNS.Shape oShape = null;
+            pptNS.Shape oPicShape = null;
 
             xlNS.ApplicationClass excelApplication = null;
             xlNS.Workbook excelWorkBook = null;
@@ -88,7 +89,7 @@ namespace ExcelPptTest
             xlNS.ChartObject existingChartObject = null;
             xlNS.Range destRange = null;
 
-            string paramPresentationPath = @"D:\test\Chart Slide.pptx";
+            string paramPresentationPath = @"D:\test\Test Slide.pptx";
             string paramWorkbookPath = @"D:\test\NPS.xlsx";
             object paramMissing = Type.Missing;
 
@@ -130,11 +131,12 @@ namespace ExcelPptTest
 
                 // capture range
                 //var writeRange = targetSheet.Range["A1:B15"];
-                destRange = targetSheet.get_Range("A1:B15");
-                oTxtShape = pptSlide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, Left: 30, Top: 30, Width: 340, Height: 340);
-                oTxtShape.TextFrame.TextRange.Text = "This is my demo text";
+                destRange = targetSheet.get_Range("A1:B21");
+                oTxtShape = pptSlide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, Left: 70, Top: 30, Width: 550, Height: 340);
+                oTxtShape.TextFrame.TextRange.Text = "GB NPS 03/01/2017 to 26/01/2017";
                 oTxtShape.TextEffect.FontName = "Arial";
                 oTxtShape.TextEffect.FontSize = 32;
+                oTxtShape.TextEffect.FontBold = Microsoft.Office.Core.MsoTriState.msoTrue;
                 oTxtShape.TextEffect.Alignment = Microsoft.Office.Core.MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
 
                 System.Array myvalues = (System.Array)destRange.Cells.Value;
@@ -145,11 +147,13 @@ namespace ExcelPptTest
                 int row = 2;
 
                 oShape = pptSlide.Shapes.AddTable(iRows, iColumns, 500, 110, 160, 120);
+                oShape.Table.ApplyStyle("{5940675A-B579-460E-94D1-54222C63F5DA}");
+                //oShape.Table.ApplyStyle("{0660B408-B3CF-4A94-85FC-2B1E0A45F4A2}");
+                // table style guide https://msdn.microsoft.com/en-us/library/office/hh273476(v=office.14).aspx
                 oShape.Table.Cell(1, 1).Merge(oShape.Table.Cell(1, 2));
-
-                oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Text = "Spain Data 01/01/2017 to 20/01/2017";
-                oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Font.Name = "Verdana";
-                oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Font.Size = 8;
+                //oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Text = "Spain Data 01/01/2017 to 20/01/2017";
+                //oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Font.Name = "Verdana";
+                //oShape.Table.Cell(1, 1).Shape.TextFrame.TextRange.Font.Size = 8;
 
                 foreach (Tuple<string, string> item in cellData)
                 {
@@ -157,13 +161,13 @@ namespace ExcelPptTest
                     string strValue = item.Item2;
 
                     oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Text = strdate;
-                    oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Font.Name = "Verdana";
-                    oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Font.Size = 8;
+                    oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Font.Name = "Arial";
+                    oShape.Table.Cell(row, 1).Shape.TextFrame.TextRange.Font.Size = 10;
 
 
                     oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Text = (strValue.StartsWith("0") ?  "0%" : (strValue + "0%"));
-                    oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Name = "Verdana";
-                    oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Size = 8;
+                    oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Name = "Arial";
+                    oShape.Table.Cell(row, 2).Shape.TextFrame.TextRange.Font.Size = 10;
 
                     //if (row == 1)
                     //{
@@ -181,6 +185,10 @@ namespace ExcelPptTest
                 oShape.Top = 100;
                 oShape.Left =30;
 
+                oPicShape = pptSlide.Shapes.AddPicture(@"D:\test\chart.png", 
+                    Microsoft.Office.Core.MsoTriState.msoFalse,
+                    Microsoft.Office.Core.MsoTriState.msoTrue, 200, 100, 500, 320);
+        
                 //copy range
                 //destRange.Copy();
 
