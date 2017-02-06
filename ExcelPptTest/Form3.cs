@@ -14,132 +14,111 @@ namespace ExcelPptTest
 {
     public partial class Form3 : Form
     {
-        int _x = -1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private RectangleF _rect;
-
-
         public Form3()
         {
             InitializeComponent();
-            Init();
+            show();
         }
 
-        private void Init()
+        private void show()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 1D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, 2D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(2D, 4D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 5D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(4D, 4D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(5D, 1D);
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            DataRow dr = null;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Date", typeof(DateTime));
+            dt.Columns.Add("data", typeof(double));
+            dt.Columns.Add("CountryCode", typeof(string));
 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(32, 45);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.Points.Add(dataPoint4);
-            series1.Points.Add(dataPoint5);
-            series1.Points.Add(dataPoint6);
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(584, 360);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
-            this.chart1.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.chart1_PostPaint);
-            this.chart1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.chart1_KeyDown);
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("01/01/2017");
+            dr[1] = 30 ;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
 
-            this.Controls.Add(this.chart1);
-            this.ClientSize = new System.Drawing.Size(676, 474);
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("02/01/2017");
+            dr[1] = 09;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
 
-            this.chart1.MouseDown += new MouseEventHandler(chart1_MouseDown);
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("03/01/2017");
+            dr[1] = 15 ;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
 
-            this.Text = "Use Ctrl and Arrow keys to move the rectangle";
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("04/01/2017");
+            dr[1] = 22 ;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
+
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("05/01/2017");
+            dr[1] = 13 ;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
+
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("06/01/2017");
+            dr[1] = 22 ;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
+
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("07/01/2017");
+            dr[1] = 07 ;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
+
+            dr = dt.NewRow();
+            dr[0] = DateTime.Parse("08/01/2017");
+            dr[1] = 11 ;
+            dr[2] = "GB";
+            dt.Rows.Add(dr);
+
+
+            //Chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
+            ////Chart1.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
+            //Chart1.BorderlineColor = System.Drawing.Color.FromArgb(26, 59, 105);
+            //Chart1.BorderlineWidth = 3;
+            //Chart1.BackColor = Color.NavajoWhite;
+            //Chart1.ChartAreas.Add("chtArea");
+            Chart1.ChartAreas[0].AxisX.Title = "NPS Dates";
+            Chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -60;
+            Chart1.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Verdana", 11, System.Drawing.FontStyle.Bold);
+            Chart1.ChartAreas[0].AxisX.Interval = 1;
+
+            Chart1.ChartAreas[0].AxisY.Title = "NPS Values";
+            Chart1.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Verdana", 11, System.Drawing.FontStyle.Bold);
+            Chart1.ChartAreas[0].AxisY.LabelStyle.Format = "P";
+
+            Chart1.ChartAreas[0].BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            Chart1.ChartAreas[0].BorderWidth = 2;
+
+            //Chart1.Legends.Add("UnitPrice");
+            //Chart1.Series.Add("UnitPricexxx");
+            //Chart1.Series[0].Palette = ChartColorPalette.Bright;
+            Chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            Chart1.Series[0].Points.DataBindXY(dt.DefaultView, "Date", dt.DefaultView, "Data");
+
+            //Chart1.Series[0].IsVisibleInLegend = true;
+            Chart1.Series[0].IsValueShownAsLabel = true;
+            Chart1.Series[0].ToolTip = "Data Point Y Value: #VALY{G}";
+
+            // Setting Line Width
+            Chart1.Series[0].BorderWidth = 3;
+            Chart1.Series[0].Color = Color.Red;
+
+            // Setting Line Shadow
+            //Chart1.Series[0].ShadowOffset = 5;
+
+            //Legend Properties
+            Chart1.Legends[0].LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Table;
+            Chart1.Legends[0].TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
+            Chart1.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            Chart1.Width = 488;
+            Chart1.Height = 345;
         }
 
-        void chart1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && this._rect.Contains(new Point(e.X, e.Y)))
-                MessageBox.Show("inside");
-        }
-
-        //controlKey must be held down
-        private void chart1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == (Keys.Right | Keys.Control))
-            {
-                _x++;
-
-                _x = Math.Min(this.chart1.Series[0].Points.Count, _x);
-
-                this.chart1.Invalidate();
-            }
-
-            if (e.KeyData == (Keys.Left | Keys.Control))
-            {
-                _x--;
-
-                _x = Math.Max(_x, -1);
-
-                this.chart1.Invalidate();
-            }
-        }
-
-        private void chart1_PostPaint(object sender, System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs e)
-        {
-            object o = e.ChartElement;
-
-            if (o.GetType().Equals(typeof(System.Windows.Forms.DataVisualization.Charting.Series)))
-            {
-                Series s = (Series)o;
-
-                //maxima and minima
-                double y2 = chart1.ChartAreas[0].AxisY.Maximum;
-                double y1 = chart1.ChartAreas[0].AxisY.Minimum;
-
-                float xVal = (float)e.ChartGraphics.GetPositionFromAxis(e.Chart.ChartAreas[0].Name, System.Windows.Forms.DataVisualization.Charting.AxisName.X, _x);
-                float xVal2 = (float)e.ChartGraphics.GetPositionFromAxis(e.Chart.ChartAreas[0].Name, System.Windows.Forms.DataVisualization.Charting.AxisName.X, _x - 1);
-                float yVal = (float)e.ChartGraphics.GetPositionFromAxis(e.Chart.ChartAreas[0].Name, System.Windows.Forms.DataVisualization.Charting.AxisName.Y, y1);
-                float yVal2 = (float)e.ChartGraphics.GetPositionFromAxis(e.Chart.ChartAreas[0].Name, System.Windows.Forms.DataVisualization.Charting.AxisName.Y, y2);
-
-                //rectangle for the moveable "Pointer"
-                this._rect = e.ChartGraphics.GetAbsoluteRectangle(new RectangleF(new PointF(xVal - 0.5F, yVal2), new SizeF(1F, Math.Abs(yVal - yVal2))));
-
-                //draw the pointer
-                using (SolidBrush sb = new SolidBrush(Color.FromArgb(64, 255, 0, 0)))
-                    e.ChartGraphics.Graphics.FillRectangle(sb, Rectangle.Round(this._rect));
-
-                //check the points of the current series
-                for (int i = 0; i < s.Points.Count; i++)
-                {
-                    //some values needed
-                    float xV = (float)e.ChartGraphics.GetPositionFromAxis(e.Chart.ChartAreas[0].Name, System.Windows.Forms.DataVisualization.Charting.AxisName.X, s.Points[i].XValue);
-                    float xV2 = 0;
-                    if (i > 0)
-                        xV2 = (float)e.ChartGraphics.GetPositionFromAxis(e.Chart.ChartAreas[0].Name, System.Windows.Forms.DataVisualization.Charting.AxisName.X, s.Points[i - 1].XValue);
-                    float yV = (float)e.ChartGraphics.GetPositionFromAxis(e.Chart.ChartAreas[0].Name, System.Windows.Forms.DataVisualization.Charting.AxisName.Y, s.Points[i].YValues[0]);
-
-                    //if the yValue is greate than 3 draw a red rectangle
-                    if (s.Points[i].YValues[0] > 3)
-                    {
-                        RectangleF r = e.ChartGraphics.GetAbsoluteRectangle(
-                            new RectangleF(new PointF(xV - Math.Abs(xV - xV2) / 2F + 1, yV),
-                                new SizeF(Math.Abs((xV - 1) - (xV2 + 1)), yVal - yV)));
-                        e.ChartGraphics.Graphics.FillRectangle(Brushes.Red, r);
-                    }
-                }
-            }
-        }
     }
 }
