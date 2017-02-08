@@ -217,6 +217,10 @@ namespace ExcelPptTest
                 pptPresentation.SaveAs(paramPresentationPath,
                                 pptNS.PpSaveAsFileType.ppSaveAsOpenXMLPresentation,
                                 Microsoft.Office.Core.MsoTriState.msoTrue);
+
+                pptPresentation.SaveCopyAs(String.Format(@"D:\test\Export", "video_of_presentation"),
+                        pptNS.PpSaveAsFileType.ppSaveAsEMF,
+                         Microsoft.Office.Core.MsoTriState.msoCTrue);
             }
             catch (Exception ex)
             {
