@@ -192,7 +192,7 @@ namespace ExcelPptTest
             Chart1.Legends[0].TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
             Chart1.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             Chart1.Width = 500;
-            Chart1.Height = 320;
+            Chart1.Height = 300;
             Chart1.SaveImage(@"D:\test\chart.png",ChartImageFormat.Png);
         }
 

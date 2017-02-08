@@ -187,7 +187,7 @@ namespace ExcelPptTest
 
                 oPicShape = pptSlide.Shapes.AddPicture(@"D:\test\chart.png", 
                     Microsoft.Office.Core.MsoTriState.msoFalse,
-                    Microsoft.Office.Core.MsoTriState.msoTrue, 200, 100, 500, 320);
+                    Microsoft.Office.Core.MsoTriState.msoTrue, 200, 100, 500, 300);
         
                 //copy range
                 //destRange.Copy();
