@@ -23,6 +23,10 @@ namespace ExcelPptTest
 
         private void show()
         {
+            DateTime dt22 = DateTime.Now;
+
+            string xx = dt22.ToString("yyyyMMddhhmmss");
+
             DataRow dr = null;
             DataTable dt = new DataTable();
             dt.Columns.Add("Date", typeof(DateTime));
