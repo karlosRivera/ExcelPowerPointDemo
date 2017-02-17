@@ -34,121 +34,121 @@ namespace ExcelPptTest
             dt.Columns.Add("CountryCode", typeof(string));
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("01/01/2017");
+            dr[0] = DateTime.Parse("01/01/2017 12:10:45");
             dr[1] = (decimal) 30 / 100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("02/01/2017");
+            dr[0] = DateTime.Parse("02/01/2017 12:10:45");
             dr[1] = (decimal) 09/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("03/01/2017");
+            dr[0] = DateTime.Parse("03/01/2017 12:10:45");
             dr[1] = (decimal) 15/100 ;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("04/01/2017");
+            dr[0] = DateTime.Parse("04/01/2017 12:10:45");
             dr[1] = (decimal) 22/100 ;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("05/01/2017");
+            dr[0] = DateTime.Parse("05/01/2017 12:10:45");
             dr[1] = (decimal) 13/100 ;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("06/01/2017");
+            dr[0] = DateTime.Parse("06/01/2017 12:10:45");
             dr[1] = (decimal) 22/100 ;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("07/01/2017");
+            dr[0] = DateTime.Parse("07/01/2017 12:10:45");
             dr[1] = (decimal) 07/100 ;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("08/01/2017");
+            dr[0] = DateTime.Parse("08/01/2017 12:10:45");
             dr[1] = (decimal) 11/100 ;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("09/01/2017");
+            dr[0] = DateTime.Parse("09/01/2017 12:10:45");
             dr[1] = (decimal) 12/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("10/01/2017");
+            dr[0] = DateTime.Parse("10/01/2017 12:10:45");
             dr[1] = (decimal) 17 / 100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("11/01/2017");
+            dr[0] = DateTime.Parse("11/01/2017 12:10:45");
             dr[1] = (decimal) 19/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("12/01/2017");
+            dr[0] = DateTime.Parse("12/01/2017 12:10:45");
             dr[1] = (decimal) 02/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("13/01/2017");
+            dr[0] = DateTime.Parse("13/01/2017 12:10:45");
             dr[1] = (decimal) 01/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("14/01/2017");
+            dr[0] = DateTime.Parse("14/01/2017 12:10:45");
             dr[1] = (decimal) 0;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("15/01/2017");
+            dr[0] = DateTime.Parse("15/01/2017 12:10:45");
             dr[1] = (decimal) 0;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("16/01/2017");
+            dr[0] = DateTime.Parse("16/01/2017 12:10:45");
             dr[1] = (decimal) 07/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("17/01/2017");
+            dr[0] = DateTime.Parse("17/01/2017 12:10:45");
             dr[1] = (decimal) 19/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("18/01/2017");
+            dr[0] = DateTime.Parse("18/01/2017 12:10:45");
             dr[1] = (decimal) .2;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("19/01/2017");
+            dr[0] = DateTime.Parse("19/01/2017 12:10:45");
             dr[1] = (decimal) 23/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr[0] = DateTime.Parse("20/01/2017");
+            dr[0] = DateTime.Parse("20/01/2017 12:10:45");
             dr[1] = (decimal) 35/100;
             dr[2] = "GB";
             dt.Rows.Add(dr);
@@ -163,6 +163,7 @@ namespace ExcelPptTest
             Chart1.ChartAreas[0].AxisX.LabelStyle.Angle = -60;
             Chart1.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Verdana", 11, System.Drawing.FontStyle.Bold);
             Chart1.ChartAreas[0].AxisX.Interval = 1;
+            //Chart1.ChartAreas[0].AxisX.LabelStyle.Format = "MyAxisXCustomFormat";
 
             Chart1.ChartAreas[0].AxisY.Title = "NPS Values";
             Chart1.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Verdana", 11, System.Drawing.FontStyle.Bold);
@@ -199,6 +200,36 @@ namespace ExcelPptTest
             Chart1.Height = 300;
             Chart1.SaveImage(@"D:\test\chart.png",ChartImageFormat.Png);
         }
+
+        private void Chart1_Customize(object sender, EventArgs e)
+        {
+            foreach (var lbl in Chart1.ChartAreas[0].AxisX.CustomLabels)
+            {
+                int monthNumber = int.Parse(lbl.Text);
+                if (monthNumber >= 1 && monthNumber <= 12)
+                    lbl.Text = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthNumber);
+                else
+                    lbl.Text = "";
+            }
+        }
+
+        //private void Chart1_FormatNumber(object sender, FormatNumberEventArgs e)
+        //{
+        //    if (e.ElementType == System.Windows.Forms.DataVisualization.Charting.ChartElementType.AxisLabels)
+        //    {
+        //        switch (e.Format)
+        //        {
+        //            case "MyAxisXCustomFormat":
+        //                e.LocalizedValue = DateTime.ParseExact(e.Value.ToString(), "yyyyMMdd", null).ToString("dd-MM");
+        //                break;
+        //            case "MyAxisYCustomFormat":
+        //                //e.LocalizedValue = e.Value.ToString("#,###", _numberFormatInfoNLV);
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    }
+        //}
 
     }
 }
