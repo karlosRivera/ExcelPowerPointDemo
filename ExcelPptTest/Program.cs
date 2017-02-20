@@ -16,7 +16,7 @@ namespace ExcelPptTest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SlideShow());
+            Application.Run(new QuartzTest());
         }
     }
 }
