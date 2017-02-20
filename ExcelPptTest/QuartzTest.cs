@@ -12,13 +12,18 @@ using Quartz.Impl;
 
 namespace ExcelPptTest
 {
-    public partial class QuartzTest : Form
+    public partial class QuartzTest : Form , IJob
     {
         IScheduler sched = null;
 
         public QuartzTest()
         {
             InitializeComponent();
+        }
+
+        public void Execute(IJobExecutionContext context)
+        {
+            MessageBox.Show("job start");
         }
 
         private void QuartzTest_Load(object sender, EventArgs e)
@@ -30,7 +35,7 @@ namespace ExcelPptTest
             sched = schedFact.GetScheduler();
             sched.Start();
 
-            IJobDetail job = JobBuilder.Create<LoggingJob>()
+            IJobDetail job = JobBuilder.Create<QuartzTest>()
                 .WithIdentity("myJob", "group1")
                 .Build();
 
@@ -39,7 +44,7 @@ namespace ExcelPptTest
                  (s =>
                     s.WithIntervalInHours(24)
                    .OnEveryDay()
-                   .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(18, 56))
+                   .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(19, 07))
                  )
                .Build();
 
@@ -52,11 +57,11 @@ namespace ExcelPptTest
         }
     }
 
-    public class LoggingJob : IJob
-    {
-        public void Execute(IJobExecutionContext context)
-        {
-            MessageBox.Show("job start");
-        }
-    }
+    //public class LoggingJob : IJob
+    //{
+    //    public void Execute(IJobExecutionContext context)
+    //    {
+    //        MessageBox.Show("job start");
+    //    }
+    //}
 }
