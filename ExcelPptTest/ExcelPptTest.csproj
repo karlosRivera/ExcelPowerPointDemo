@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dlls\Interop.Excel.dll" />
+    <Content Include="dlls\Quartz.dll" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
